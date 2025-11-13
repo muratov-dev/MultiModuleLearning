@@ -29,6 +29,7 @@ dependencies {
     implementation(project(":core:models"))
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
+    implementation(project(":core:navigation"))
 
     // --- Dependency Injection ---
     implementation(libs.hilt.android)

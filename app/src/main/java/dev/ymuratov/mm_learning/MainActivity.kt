@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ymuratov.core.ui.theme.AppTheme
 import dev.ymuratov.feature.categories.navigation.ROUTE_CATEGORIES
-import dev.ymuratov.feature.categories.navigation.categoriesNav
+import dev.ymuratov.feature.categories.navigation.categoriesGraph
 import dev.ymuratov.feature.categoryproducts.navigation.categoryProductsNav
 import dev.ymuratov.feature.categoryproducts.presentation.CategoryProductsViewModel
 import dev.ymuratov.feature.productdetail.navigation.productDetailNav
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 Surface(color = MaterialTheme.colorScheme.background) {
                     NavHost(navController = navController, startDestination = ROUTE_CATEGORIES) {
-                        categoriesNav(onCategoryClick = { category ->
+                        categoriesGraph(onCategoryClick = { category ->
                             navController.navigate("categoryProducts/$category")
                         })
                         categoryProductsNav(onProductClick = { id ->

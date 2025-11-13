@@ -1,6 +1,6 @@
 package dev.ymuratov.feature.categories
 
-import dev.ymuratov.feature.categories.data.CategoriesRepository
+import dev.ymuratov.feature.categories.domain.CategoriesRepository
 import dev.ymuratov.feature.categories.data.CategoriesRepositoryImpl
 import dagger.Binds
 import dagger.Module

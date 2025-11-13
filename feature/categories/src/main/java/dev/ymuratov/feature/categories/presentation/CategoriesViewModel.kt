@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ymuratov.core.models.CategoryModel
-import dev.ymuratov.feature.categories.domain.GetCategoriesUseCase
+import dev.ymuratov.feature.categories.domain.CategoriesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +17,7 @@ data class CategoriesUiState(
 
 @HiltViewModel
 class CategoriesViewModel @Inject constructor(
-    private val getCategories: GetCategoriesUseCase
+    private val categoriesRepository: CategoriesRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CategoriesUiState(isLoading = true))
     val uiState: StateFlow<CategoriesUiState> = _uiState.asStateFlow()
@@ -30,7 +30,7 @@ class CategoriesViewModel @Inject constructor(
         _uiState.value = CategoriesUiState(isLoading = true)
         viewModelScope.launch {
             try {
-                getCategories().collect { list ->
+                categoriesRepository.getCategories().collect { list ->
                     _uiState.value = CategoriesUiState(data = list)
                 }
             } catch (t: Throwable) {
