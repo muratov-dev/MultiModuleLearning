@@ -11,10 +11,14 @@ interface ProductApiService {
     suspend fun getCategories(): List<CategoryItemDto>
 
     @GET("products/category/{category}")
-    suspend fun getProductsByCategory(@Path("category") category: String): ProductsDto
+    suspend fun getProductsByCategory(
+        @Path("category") category: String
+    ): ProductsDto
 
     @GET("products/{id}")
-    suspend fun getProductById(@Path("id") id: Int): ProductDto
+    suspend fun getProductById(
+        @Path("id") id: Int
+    ): ProductDto
 }
 
 

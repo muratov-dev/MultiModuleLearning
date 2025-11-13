@@ -16,6 +16,7 @@ annotation class IoDispatcher
 @Module
 @InstallIn(SingletonComponent::class)
 object CoroutinesModule {
+
     @Provides
     @Singleton
     @IoDispatcher

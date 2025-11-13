@@ -3,37 +3,6 @@ package dev.ymuratov.core.network.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CategoryItemDto(
-    val slug: String?,
-    val name: String?,
-    val url: String?
-)
-
-@Serializable
-data class DimensionsDto(
-    val width: Double?,
-    val height: Double?,
-    val depth: Double?
-)
-
-@Serializable
-data class ReviewDto(
-    val rating: Int?,
-    val comment: String?,
-    val date: String?,
-    val reviewerName: String?,
-    val reviewerEmail: String?
-)
-
-@Serializable
-data class MetaDto(
-    val createdAt: String?,
-    val updatedAt: String?,
-    val barcode: String?,
-    val qrCode: String?
-)
-
-@Serializable
 data class ProductDto(
     val id: Int?,
     val title: String?,
@@ -58,13 +27,3 @@ data class ProductDto(
     val images: List<String>?,
     val thumbnail: String?
 )
-
-@Serializable
-data class ProductsDto(
-    val products: List<ProductDto>?,
-    val total: Int? = null,
-    val skip: Int? = null,
-    val limit: Int? = null
-)
-
-

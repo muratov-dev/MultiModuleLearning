@@ -1,4 +1,4 @@
-package dev.ymuratov.core.network
+package dev.ymuratov.core.network.di
 
 import dagger.Module
 import dagger.Provides
@@ -12,11 +12,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
 
-const val BASE_URL: String = "https://dummyjson.com/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    const val BASE_URL: String = "https://dummyjson.com/"
 
     @Provides
     @Singleton
