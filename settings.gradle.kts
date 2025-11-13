@@ -21,3 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MultiModuleLearning"
 include(":app")
+include(":core:models")
+include(":core:network")
+include(":core:ui")
+include(":feature:categories")
+include(":feature:categoryproducts")
+include(":feature:productdetail")

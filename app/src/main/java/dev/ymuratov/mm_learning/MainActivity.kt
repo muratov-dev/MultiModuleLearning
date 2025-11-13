@@ -4,44 +4,42 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import dev.ymuratov.mm_learning.ui.theme.MultiModuleLearningTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
+import dev.ymuratov.core.ui.theme.AppTheme
+import dev.ymuratov.feature.categories.navigation.ROUTE_CATEGORIES
+import dev.ymuratov.feature.categories.navigation.categoriesNav
+import dev.ymuratov.feature.categoryproducts.navigation.categoryProductsNav
+import dev.ymuratov.feature.categoryproducts.presentation.CategoryProductsViewModel
+import dev.ymuratov.feature.productdetail.navigation.productDetailNav
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MultiModuleLearningTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            AppTheme {
+                val navController = rememberNavController()
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    NavHost(navController = navController, startDestination = ROUTE_CATEGORIES) {
+                        categoriesNav(onCategoryClick = { category ->
+                            navController.navigate("categoryProducts/$category")
+                        })
+                        categoryProductsNav(onProductClick = { id ->
+                            navController.navigate("productDetail/$id")
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                CategoryProductsViewModel.RESULT_KEY,
+                                false
+                            )
+                        })
+                        productDetailNav(navController)
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MultiModuleLearningTheme {
-        Greeting("Android")
     }
 }

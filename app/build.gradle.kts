@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -37,6 +39,17 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core:models"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:network"))
+    implementation(project(":feature:categories"))
+    implementation(project(":feature:categoryproducts"))
+    implementation(project(":feature:productdetail"))
+
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compose)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
