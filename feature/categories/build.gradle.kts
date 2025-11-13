@@ -12,16 +12,6 @@ android {
 
     defaultConfig {
         minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -40,15 +30,21 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
 
+    // --- Dependency Injection ---
     implementation(libs.hilt.android)
     implementation(libs.hilt.compose)
     ksp(libs.hilt.compiler)
 
+    // --- Compose ---
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+
+    // --- Navigation ---
     implementation(libs.androidx.navigation.compose)
+
+    // --- UI ---
+    implementation(libs.androidx.material3)
     implementation(libs.coil.compose)
 }

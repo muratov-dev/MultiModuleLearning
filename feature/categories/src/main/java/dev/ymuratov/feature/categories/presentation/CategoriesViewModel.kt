@@ -3,7 +3,7 @@ package dev.ymuratov.feature.categories.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.ymuratov.core.models.Category
+import dev.ymuratov.core.models.CategoryModel
 import dev.ymuratov.feature.categories.domain.GetCategoriesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class CategoriesUiState(
-    val isLoading: Boolean = false, val data: List<Category> = emptyList(), val error: String? = null
+    val isLoading: Boolean = false, val data: List<CategoryModel> = emptyList(), val error: String? = null
 )
 
 @HiltViewModel

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.ymuratov.core.models.Product
+import dev.ymuratov.core.models.ProductModel
 import dev.ymuratov.feature.categoryproducts.domain.GetProductsByCategoryUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 data class CategoryProductsUiState(
     val isLoading: Boolean = false,
-    val data: List<Product> = emptyList(),
+    val data: List<ProductModel> = emptyList(),
     val error: String? = null,
     val category: String = ""
 )

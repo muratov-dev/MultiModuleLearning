@@ -1,6 +1,6 @@
 package dev.ymuratov.feature.categories.data
 
-import dev.ymuratov.core.models.Category
+import dev.ymuratov.core.models.CategoryModel
 import dev.ymuratov.core.network.api.ProductApiService
 import dev.ymuratov.core.network.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,10 +13,10 @@ class CategoriesRepositoryImpl @Inject constructor(
     private val api: ProductApiService,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : CategoriesRepository {
-    override fun getCategories(): Flow<List<Category>> = flow {
+    override fun getCategories(): Flow<List<CategoryModel>> = flow {
         val items = api.getCategories()
         emit(items.map { dto ->
-            Category(
+            CategoryModel(
                 slug = dto.slug ?: "unknown",
                 name = dto.name ?: "",
                 url = dto.url ?: ""

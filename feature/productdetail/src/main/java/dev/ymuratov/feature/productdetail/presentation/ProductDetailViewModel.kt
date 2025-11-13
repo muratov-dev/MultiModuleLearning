@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.ymuratov.core.models.Product
+import dev.ymuratov.core.models.ProductModel
 import dev.ymuratov.feature.productdetail.domain.GetProductByIdUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ProductDetailUiState(
-    val isLoading: Boolean = false, val data: Product? = null, val error: String? = null
+    val isLoading: Boolean = false, val data: ProductModel? = null, val error: String? = null
 )
 
 @HiltViewModel
