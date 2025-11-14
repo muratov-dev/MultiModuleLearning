@@ -44,9 +44,9 @@ dependencies {
     implementation(project(":core:models"))
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
+    implementation(project(":feature:categories"))
 
     // --- Feature modules ---
-    implementation(project(":feature:categories"))
     implementation(project(":feature:categoryproducts"))
     implementation(project(":feature:productdetail"))
 

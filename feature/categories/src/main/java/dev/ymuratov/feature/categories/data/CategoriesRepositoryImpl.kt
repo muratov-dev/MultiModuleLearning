@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl @Inject constructor(
@@ -16,8 +17,9 @@ class CategoriesRepositoryImpl @Inject constructor(
 ) : CategoriesRepository {
 
     override fun getCategories(): Flow<List<CategoryModel>> = flow {
-        val items = api.getCategories()
-        emit(items.map { dto -> dto.toDomain() })
+        emit(api.getCategories())
+    }.map { categories ->
+        categories.map { it.toDomain() }
     }.flowOn(ioDispatcher)
 }
 
