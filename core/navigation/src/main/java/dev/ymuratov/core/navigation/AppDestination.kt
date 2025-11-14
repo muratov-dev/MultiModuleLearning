@@ -9,4 +9,7 @@ sealed class AppDestination {
 
     @Serializable
     data class CategoryProducts(val categorySlug: String) : AppDestination()
+
+    @Serializable
+    data class ProductDetail(val productId: Int) : AppDestination()
 }

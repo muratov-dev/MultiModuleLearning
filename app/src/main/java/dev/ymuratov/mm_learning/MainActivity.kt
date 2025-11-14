@@ -9,12 +9,11 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.ymuratov.core.navigation.AppDestination
 import dev.ymuratov.core.ui.theme.AppTheme
-import dev.ymuratov.feature.categories.navigation.ROUTE_CATEGORIES
 import dev.ymuratov.feature.categories.presentation.navigation.categoriesGraph
 import dev.ymuratov.feature.categoryproducts.presentation.navigation.categoryProductsNav
-import dev.ymuratov.feature.categoryproducts.presentation.viewmodel.CategoryProductsViewModel
-import dev.ymuratov.feature.productdetail.navigation.productDetailNav
+import dev.ymuratov.feature.productdetail.presentation.navigation.productDetailNav
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -25,17 +24,13 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 val navController = rememberNavController()
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    NavHost(navController = navController, startDestination = ROUTE_CATEGORIES) {
-                        categoriesGraph(onCategoryClick = { category ->
-                            navController.navigate("categoryProducts/$category")
-                        })
-                        categoryProductsNav(onProductClick = { id ->
-                            navController.navigate("productDetail/$id")
-                            navController.currentBackStackEntry?.savedStateHandle?.set(
-                                CategoryProductsViewModel.RESULT_KEY,
-                                false
-                            )
-                        })
+                    NavHost(navController = navController, startDestination = AppDestination.Categories) {
+                        categoriesGraph {
+                            navController.navigate(AppDestination.CategoryProducts(it))
+                        }
+                        categoryProductsNav {
+                            navController.navigate(AppDestination.ProductDetail(it))
+                        }
                         productDetailNav(navController)
                     }
                 }

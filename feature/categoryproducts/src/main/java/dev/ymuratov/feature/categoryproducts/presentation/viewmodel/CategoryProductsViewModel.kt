@@ -26,6 +26,7 @@ class CategoryProductsViewModel @Inject constructor(
     override fun obtainEvent(viewEvent: CategoryProductsEvent) {
         when (viewEvent) {
             CategoryProductsEvent.OnDataRefresh -> refreshData()
+            is CategoryProductsEvent.OnProductSelect -> sendAction(CategoryProductsAction.NavigateToProductDetails(viewEvent.productId))
         }
     }
 
