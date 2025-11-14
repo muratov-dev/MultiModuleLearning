@@ -9,11 +9,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.ymuratov.core.ui.components.AppToolbar
 import dev.ymuratov.core.ui.components.ErrorView
@@ -36,6 +40,20 @@ fun CategoriesContainer(
         when (action) {
             is CategoriesAction.NavigateToCategoryProducts -> navigateToCategoryProducts(action.categorySlug)
             null -> {}
+        }
+    }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when(event){
+                Lifecycle.Event.ON_RESUME -> viewModel.obtainEvent(CategoriesEvent.OnDataRefresh)
+                else -> {}
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
         }
     }
     CategoriesContent(modifier = modifier, state = state, onEvent = viewModel::obtainEvent)

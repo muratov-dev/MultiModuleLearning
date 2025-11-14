@@ -20,6 +20,7 @@ class CategoriesViewModel @Inject constructor(
 
     override fun obtainEvent(viewEvent: CategoriesEvent) {
         when (viewEvent) {
+            is CategoriesEvent.OnCategorySelect -> sendAction(CategoriesAction.NavigateToCategoryProducts(viewEvent.categorySlug))
             CategoriesEvent.OnDataRefresh -> refreshData()
         }
     }

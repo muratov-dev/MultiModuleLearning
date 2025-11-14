@@ -1,11 +1,11 @@
-package dev.ymuratov.feature.categoryproducts
+package dev.ymuratov.feature.categoryproducts.di
 
-import dev.ymuratov.feature.categoryproducts.data.CategoryProductsRepository
-import dev.ymuratov.feature.categoryproducts.data.CategoryProductsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.ymuratov.feature.categoryproducts.domain.CategoryProductsRepository
+import dev.ymuratov.feature.categoryproducts.data.CategoryProductsRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -15,5 +15,3 @@ abstract class CategoryProductsModule {
     @Singleton
     abstract fun bindCategoryProductsRepository(impl: CategoryProductsRepositoryImpl): CategoryProductsRepository
 }
-
-

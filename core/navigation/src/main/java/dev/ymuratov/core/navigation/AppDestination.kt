@@ -6,4 +6,7 @@ sealed class AppDestination {
 
     @Serializable
     object Categories : AppDestination()
+
+    @Serializable
+    data class CategoryProducts(val categorySlug: String) : AppDestination()
 }
