@@ -26,19 +26,20 @@ class CategoryProductsViewModel @Inject constructor(
     override fun obtainEvent(viewEvent: CategoryProductsEvent) {
         when (viewEvent) {
             CategoryProductsEvent.OnDataRefresh -> refreshData()
+            CategoryProductsEvent.OnNavigateUp -> sendAction(CategoryProductsAction.NavigateUp)
             is CategoryProductsEvent.OnProductSelect -> sendAction(CategoryProductsAction.NavigateToProductDetails(viewEvent.productId))
         }
     }
 
     init {
-        updateViewState { copy(selectedCategory = args.categorySlug) }
+        updateViewState { copy(selectedCategorySlug = args.categorySlug, selectedCategoryTitle = args.categoryTitle) }
     }
 
     private fun refreshData() {
-        val category = currentState.selectedCategory ?: return
+        val category = currentState.selectedCategorySlug ?: return
         repository.getProducts(category).onStart {
             updateViewState {
-                copy(isLoading = true, errorMessage = null)
+                copy(isLoading = currentState.products.isEmpty(), errorMessage = null)
             }
         }.onEach { list ->
             updateViewState { copy(products = list, isLoading = false) }

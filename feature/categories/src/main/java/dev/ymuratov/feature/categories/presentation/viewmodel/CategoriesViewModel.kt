@@ -20,7 +20,10 @@ class CategoriesViewModel @Inject constructor(
 
     override fun obtainEvent(viewEvent: CategoriesEvent) {
         when (viewEvent) {
-            is CategoriesEvent.OnCategorySelect -> sendAction(CategoriesAction.NavigateToCategoryProducts(viewEvent.categorySlug))
+            is CategoriesEvent.OnCategorySelect -> {
+                sendAction(CategoriesAction.NavigateToCategoryProducts(viewEvent.categorySlug, viewEvent.categoryTitle))
+            }
+
             CategoriesEvent.OnDataRefresh -> refreshData()
         }
     }
@@ -28,7 +31,7 @@ class CategoriesViewModel @Inject constructor(
     private fun refreshData() {
         categoriesRepository.getCategories().onStart {
             updateViewState {
-                copy(isLoading = true, errorMessage = null)
+                copy(isLoading = currentState.categories.isEmpty(), errorMessage = null)
             }
         }.onEach { list ->
             updateViewState { copy(categories = list, isLoading = false) }

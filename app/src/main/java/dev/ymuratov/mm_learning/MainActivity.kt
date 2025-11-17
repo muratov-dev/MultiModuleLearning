@@ -33,12 +33,14 @@ class MainActivity : ComponentActivity() {
                 val screenModifier = Modifier.defaultModifier()
                 Surface(color = MaterialTheme.colorScheme.background) {
                     NavHost(navController = navController, startDestination = AppDestination.Categories) {
-                        categoriesGraph(modifier = screenModifier) {
-                            navController.navigate(AppDestination.CategoryProducts(it))
+                        categoriesGraph(modifier = screenModifier) { slug, title ->
+                            navController.navigate(AppDestination.CategoryProducts(slug, title))
                         }
-                        categoryProductsGraph(modifier = screenModifier) {
-                            navController.navigate(AppDestination.ProductDetail(it))
-                        }
+                        categoryProductsGraph(
+                            modifier = screenModifier,
+                            navigateToProductDetails = { navController.navigate(AppDestination.ProductDetail(it)) },
+                            navigateUp = { navController.navigateUp() },
+                        )
                         productDetailGraph(modifier = screenModifier) {
                             navController.navigateUp()
                         }

@@ -15,7 +15,7 @@ import dev.ymuratov.core.models.CategoryModel
 import dev.ymuratov.core.ui.theme.AppTheme
 
 @Composable
-fun CategoryCard(category: CategoryModel, modifier: Modifier = Modifier, onCategoryClick: (String) -> Unit = {}) {
+fun CategoryCard(category: CategoryModel, modifier: Modifier = Modifier, onCategoryClick: () -> Unit = {}) {
     val shape = RoundedCornerShape(12.dp)
     with(category) {
         Box(
@@ -23,7 +23,7 @@ fun CategoryCard(category: CategoryModel, modifier: Modifier = Modifier, onCateg
                 .fillMaxWidth()
                 .background(color = AppTheme.colors.backgroundSecondary, shape = shape)
                 .clip(shape = shape)
-                .clickable { onCategoryClick(slug) }
+                .clickable { onCategoryClick() }
                 .padding(12.dp)) {
             Text(
                 text = name.ifBlank { slug },

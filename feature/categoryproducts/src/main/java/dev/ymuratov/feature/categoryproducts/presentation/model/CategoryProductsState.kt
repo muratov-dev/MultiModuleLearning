@@ -8,5 +8,6 @@ data class CategoryProductsState(
     val isLoading: Boolean = true,
     val products: List<ProductModel> = emptyList(),
     val errorMessage: String? = null,
-    val selectedCategory: String? = null
+    val selectedCategorySlug: String? = null,
+    val selectedCategoryTitle: String? = null
 )

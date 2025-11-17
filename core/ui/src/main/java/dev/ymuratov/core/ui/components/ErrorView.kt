@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dev.ymuratov.core.ui.theme.AppTheme
 
 @Composable
 fun ErrorView(message: String, onRetry: () -> Unit, modifier: Modifier = Modifier) {
@@ -16,8 +17,12 @@ fun ErrorView(message: String, onRetry: () -> Unit, modifier: Modifier = Modifie
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = message)
-        Button(onClick = onRetry) { Text("Retry") }
+        Text(text = message, color = AppTheme.colors.textSecondary, style = AppTheme.typography.textRegular)
+        Button(onClick = onRetry) {
+            Text(
+                "Retry", color = AppTheme.colors.buttonTextPrimary, style = AppTheme.typography.buttonMedium
+            )
+        }
     }
 }
 

@@ -13,7 +13,7 @@ import dev.ymuratov.core.ui.theme.AppTheme
 @Composable
 fun LoadingView(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator(color = AppTheme.colors.buttonPrimaryDefault, modifier = Modifier.size(48.dp))
+        CircularProgressIndicator(color = AppTheme.colors.buttonPrimaryDefault)
     }
 }
 

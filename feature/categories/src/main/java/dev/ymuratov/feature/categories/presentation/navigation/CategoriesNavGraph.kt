@@ -6,7 +6,9 @@ import androidx.navigation.compose.composable
 import dev.ymuratov.core.navigation.AppDestination
 import dev.ymuratov.feature.categories.presentation.screen.CategoriesContainer
 
-fun NavGraphBuilder.categoriesGraph(modifier: Modifier = Modifier, navigateToCategoryProducts: (String) -> Unit) {
+fun NavGraphBuilder.categoriesGraph(
+    modifier: Modifier = Modifier, navigateToCategoryProducts: (String, String) -> Unit
+) {
     composable<AppDestination.Categories> {
         CategoriesContainer(modifier = modifier, navigateToCategoryProducts = navigateToCategoryProducts)
     }

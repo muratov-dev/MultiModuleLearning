@@ -24,7 +24,7 @@ fun AppTheme(content: @Composable () -> Unit) {
                 surface = AppTheme.colors.backgroundSecondary,
                 background = AppTheme.colors.backgroundPrimary,
                 primary = AppTheme.colors.buttonPrimaryDefault,
-                onPrimary = AppTheme.colors.textPrimary,
+                onPrimary = AppTheme.colors.buttonTextPrimary,
             ), typography = Typography(), content = content
         )
     }

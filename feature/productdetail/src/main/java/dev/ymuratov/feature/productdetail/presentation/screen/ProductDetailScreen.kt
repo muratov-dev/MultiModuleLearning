@@ -13,7 +13,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,14 +22,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import dev.ymuratov.core.ui.R
 import dev.ymuratov.core.ui.components.AppToolbar
 import dev.ymuratov.core.ui.components.ErrorView
 import dev.ymuratov.core.ui.components.LoadingView
+import dev.ymuratov.core.ui.utils.OnLifecycleEvent
 import dev.ymuratov.core.ui.utils.collectFlowWithLifecycle
 import dev.ymuratov.feature.productdetail.presentation.model.ProductDetailAction
 import dev.ymuratov.feature.productdetail.presentation.model.ProductDetailEvent
@@ -49,18 +47,9 @@ fun ProductDetailContainer(
         }
     }
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> viewModel.obtainEvent(ProductDetailEvent.OnDataRefresh)
-                else -> {}
-            }
-        }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
+
+    OnLifecycleEvent(Lifecycle.Event.ON_RESUME) {
+        viewModel.obtainEvent(ProductDetailEvent.OnDataRefresh)
     }
     ProductDetailContent(modifier = modifier, state = state, onEvent = viewModel::obtainEvent)
 }
@@ -85,7 +74,9 @@ fun ProductDetailContent(
             state.errorMessage != null -> ErrorView(
                 message = state.errorMessage,
                 onRetry = { onEvent(ProductDetailEvent.OnDataRefresh) },
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .padding(horizontal = 32.dp)
+                    .fillMaxSize()
             )
 
             else -> Column(
