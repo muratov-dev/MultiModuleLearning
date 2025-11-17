@@ -3,6 +3,7 @@ package dev.ymuratov.feature.categories.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
@@ -23,6 +25,7 @@ import dev.ymuratov.core.ui.components.AppToolbar
 import dev.ymuratov.core.ui.components.ErrorView
 import dev.ymuratov.core.ui.components.LoadingView
 import dev.ymuratov.core.ui.utils.collectFlowWithLifecycle
+import dev.ymuratov.feature.categories.R
 import dev.ymuratov.feature.categories.presentation.component.CategoryCard
 import dev.ymuratov.feature.categories.presentation.model.CategoriesAction
 import dev.ymuratov.feature.categories.presentation.model.CategoriesEvent
@@ -46,7 +49,7 @@ fun CategoriesContainer(
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
-            when(event){
+            when (event) {
                 Lifecycle.Event.ON_RESUME -> viewModel.obtainEvent(CategoriesEvent.OnDataRefresh)
                 else -> {}
             }
@@ -64,7 +67,7 @@ private fun CategoriesContent(
     modifier: Modifier = Modifier, state: CategoriesState = CategoriesState(), onEvent: (CategoriesEvent) -> Unit = {}
 ) {
     Scaffold(
-        modifier = modifier, topBar = { AppToolbar(title = "Categories") }) { innerPadding ->
+        modifier = modifier, topBar = { AppToolbar(title = stringResource(R.string.categories_title)) }) { innerPadding ->
         Box(modifier = Modifier.padding(top = innerPadding.calculateTopPadding()), contentAlignment = Alignment.Center) {
             when {
                 state.isLoading -> LoadingView(modifier = Modifier.fillMaxSize())
@@ -79,7 +82,8 @@ private fun CategoriesContent(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .fillMaxSize(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(top = 16.dp, bottom = innerPadding.calculateBottomPadding())
                     ) {
                         items(state.categories) { category ->
                             CategoryCard(category = category, onCategoryClick = { onEvent(CategoriesEvent.OnCategorySelect(it)) })

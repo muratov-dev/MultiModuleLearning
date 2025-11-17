@@ -36,7 +36,7 @@ class ProductDetailViewModel @Inject constructor(
                 copy(isLoading = true, errorMessage = null)
             }
         }.onEach { info ->
-            updateViewState { copy(productInfo = info) }
+            updateViewState { copy(productInfo = info, isLoading = false) }
         }.catch { t ->
             updateViewState {
                 copy(errorMessage = t.message ?: "Unknown error", isLoading = false)

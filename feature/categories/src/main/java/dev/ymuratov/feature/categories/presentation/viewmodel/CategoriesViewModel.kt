@@ -31,7 +31,7 @@ class CategoriesViewModel @Inject constructor(
                 copy(isLoading = true, errorMessage = null)
             }
         }.onEach { list ->
-            updateViewState { copy(categories = list) }
+            updateViewState { copy(categories = list, isLoading = false) }
         }.catch { t ->
             updateViewState {
                 copy(errorMessage = t.message ?: "Unknown error", isLoading = false)
