@@ -26,6 +26,7 @@ class ProductDetailViewModel @Inject constructor(
     override fun obtainEvent(viewEvent: ProductDetailEvent) {
         when (viewEvent) {
             ProductDetailEvent.OnNavigateUp -> sendAction(ProductDetailAction.NavigateUp)
+            ProductDetailEvent.OnNavigateToHome -> sendAction(ProductDetailAction.NavigateToHome)
             ProductDetailEvent.OnDataRefresh -> refreshData()
         }
     }
