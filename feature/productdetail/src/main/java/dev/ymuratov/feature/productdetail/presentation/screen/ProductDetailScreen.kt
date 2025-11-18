@@ -37,7 +37,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.ymuratov.core.models.ProductModel
 import dev.ymuratov.core.ui.R
-import dev.ymuratov.core.ui.components.AppAsyncImage
+import dev.ymuratov.core.ui.components.image.AppAsyncImage
 import dev.ymuratov.core.ui.components.AppIconButton
 import dev.ymuratov.core.ui.components.AppToolbar
 import dev.ymuratov.core.ui.components.ErrorView

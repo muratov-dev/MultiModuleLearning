@@ -1,4 +1,4 @@
-package dev.ymuratov.core.ui.components
+package dev.ymuratov.core.ui.components.image
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
@@ -8,8 +8,8 @@ import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
-import coil.request.CachePolicy
 import coil.request.ImageRequest
+import dev.ymuratov.core.ui.components.LoadingView
 
 @Composable
 fun AppAsyncImage(

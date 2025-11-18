@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.ymuratov.core.models.ProductModel
 import dev.ymuratov.core.ui.R
-import dev.ymuratov.core.ui.components.AppAsyncImage
+import dev.ymuratov.core.ui.components.image.AppAsyncImage
 import dev.ymuratov.core.ui.theme.AppTheme
 
 @Composable

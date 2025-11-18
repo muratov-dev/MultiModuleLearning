@@ -1,4 +1,4 @@
-package dev.ymuratov.core.ui.components
+package dev.ymuratov.core.ui.components.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
