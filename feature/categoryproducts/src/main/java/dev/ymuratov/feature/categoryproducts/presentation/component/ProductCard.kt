@@ -70,33 +70,3 @@ fun ProductCard(product: ProductModel, modifier: Modifier = Modifier, onClick: (
         }
     }
 }
-
-@Composable
-private fun PriceBlock(product: ProductModel) {
-    val hasDiscount = product.discountPercentage > 0
-
-    if (!hasDiscount) {
-        Text(
-            text = stringResource(R.string.price_placeholder, product.price),
-            style = AppTheme.typography.titleLarge,
-            color = AppTheme.colors.textPrimary
-        )
-    } else {
-        val finalPrice = product.price - (product.price * (product.discountPercentage / 100.0))
-        val originalPrice = product.price
-
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(
-                text = stringResource(R.string.price_placeholder, finalPrice),
-                style = AppTheme.typography.titleLarge,
-                color = AppTheme.colors.textPrimary
-            )
-            Text(
-                text = stringResource(R.string.price_placeholder, originalPrice),
-                style = AppTheme.typography.bodySmall,
-                color = AppTheme.colors.textSecondary,
-                textDecoration = TextDecoration.LineThrough
-            )
-        }
-    }
-}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="buy_now_button">Buy now</string>
+    <string name="product_not_found_error_text">Product not found</string>
+    <string name="reviews_title_placeholder">Reviews (%1$d)</string>
+</resources>
