@@ -22,7 +22,7 @@ import dev.ymuratov.feature.productdetail.R
 fun ProductReviews(product: ProductModel, reviewsPagerState: PagerState, modifier: Modifier = Modifier) {
     with(product) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .background(color = AppTheme.colors.backgroundSecondary, shape = RoundedCornerShape(24.dp))
                 .padding(vertical = 16.dp)
