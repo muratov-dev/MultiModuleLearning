@@ -6,18 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.ymuratov.core.navigation.AppDestination
 import dev.ymuratov.core.ui.theme.AppTheme
-import dev.ymuratov.core.ui.utils.defaultModifier
-import dev.ymuratov.feature.categories.presentation.navigation.categoriesGraph
-import dev.ymuratov.feature.categoryproducts.presentation.navigation.categoryProductsGraph
-import dev.ymuratov.feature.productdetail.presentation.navigation.productDetailGraph
+import dev.ymuratov.mm_learning.component.AppNavHost
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -30,22 +23,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 val navController = rememberNavController()
-                val screenModifier = Modifier.defaultModifier()
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    NavHost(navController = navController, startDestination = AppDestination.Categories) {
-                        categoriesGraph(modifier = screenModifier) { slug, title ->
-                            navController.navigate(AppDestination.CategoryProducts(slug, title))
-                        }
-                        categoryProductsGraph(
-                            modifier = screenModifier,
-                            navigateToProductDetails = { navController.navigate(AppDestination.ProductDetail(it)) },
-                            navigateUp = { navController.navigateUp() },
-                        )
-                        productDetailGraph(modifier = screenModifier) {
-                            navController.navigateUp()
-                        }
-                    }
-                }
+                val startDestination = AppDestination.Categories
+                AppNavHost(navController = navController, startDestination = startDestination)
             }
         }
     }
